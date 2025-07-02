@@ -7,6 +7,8 @@ import Marketplace from './pages/Marketplace';
 import TractorServices from './pages/TractorServices';
 import MilkTrading from './pages/MilkTrading';
 import Community from './pages/Community';
+import Login from './pages/Login'; // ✅ Import Login Page
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
             <Route path="/tractors" element={<TractorServices />} />
             <Route path="/milk" element={<MilkTrading />} />
             <Route path="/community" element={<Community />} />
+             <Route path="/login" element={<Login />} /> {/* ✅ Added Login Route */}
           </Routes>
         </div>
       </Router>

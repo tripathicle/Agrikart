@@ -226,3 +226,27 @@ export default function MilkTrading() {
     </div>
   );
 }
+
+// pages/Marketplace.tsx
+
+type Product = {
+  id: string;
+  name: string;
+  price: number;
+  // Add other relevant fields as needed
+};
+
+function Marketplace() {
+  const { addNotification } = useAppContext();
+
+  const handleAddToCart = (product: Product) => {
+    // Your existing cart logic...
+    addNotification(`${product.name} added to cart!`, 'success');
+  };
+
+  return (
+    <div>
+      {/* Marketplace content goes here */}
+    </div>
+  );
+}

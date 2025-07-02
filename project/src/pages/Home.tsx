@@ -204,7 +204,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-xl text-green-100 mb-8 max-w-2xl mx-auto">
-            Join thousands of farmers who are already using AgriConnect to grow their business.
+            Join thousands of farmers who are already using Agrikart to grow their business.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link

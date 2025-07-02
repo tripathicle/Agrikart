@@ -82,3 +82,11 @@ export interface WeatherData {
     condition: string;
   }>;
 }
+
+export type Notification = {
+  id: string;
+  message: string;
+  type: 'info' | 'success' | 'warning' | 'error';
+  read: boolean;
+  timestamp: Date;
+};

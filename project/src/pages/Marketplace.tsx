@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { Search, Filter, Grid, List } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Search, Grid, List } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
-import { mockProducts } from '../data/mockData';
 import { Product } from '../types';
 
 export default function Marketplace() {
@@ -9,7 +8,7 @@ export default function Marketplace() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [priceRange, setPriceRange] = useState('all');
   const [viewMode, setViewMode] = useState('grid');
-  const [showFilters, setShowFilters] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
 
   const categories = [
     { value: 'all', label: 'All Categories' },
@@ -29,19 +28,37 @@ export default function Marketplace() {
     { value: '1000+', label: '₹1000+' },
   ];
 
-  const filteredProducts = mockProducts.filter((product: Product) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-    
+  // ✅ Fetch products from backend
+  useEffect(() => {
+    fetch('http://localhost:5000/api/products')
+      .then((res) => res.json())
+      .then((data) => {
+        const normalized = data.map((item: any) => ({
+          ...item,
+          price: parseFloat(item.price),
+        }));
+        setProducts(normalized);
+      })
+      .catch((err) => console.error('Error fetching products:', err));
+  }, []);
+
+  // ✅ Filter logic
+  const filteredProducts = products.filter((product: Product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchTerm.toLowerCase());
+
+    const matchesCategory =
+      selectedCategory === 'all' || product.category === selectedCategory;
+
     let matchesPrice = true;
     if (priceRange !== 'all') {
-      const [min, max] = priceRange.split('-').map(p => p.replace('+', ''));
+      const [min, max] = priceRange.split('-').map((p) => p.replace('+', ''));
+      const price = product.price;
       if (max) {
-        matchesPrice = product.price >= parseInt(min) && product.price <= parseInt(max);
+        matchesPrice = price >= parseInt(min) && price <= parseInt(max);
       } else {
-        matchesPrice = product.price >= parseInt(min);
+        matchesPrice = price >= parseInt(min);
       }
     }
 
@@ -51,13 +68,12 @@ export default function Marketplace() {
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">Agricultural Marketplace</h1>
           <p className="text-gray-600">Discover fresh produce, quality equipment, and agricultural supplies</p>
         </div>
 
-        {/* Search and Filters */}
+        {/* Filters */}
         <div className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="flex flex-col lg:flex-row gap-4">
             {/* Search */}
@@ -72,7 +88,7 @@ export default function Marketplace() {
               />
             </div>
 
-            {/* Category Filter */}
+            {/* Category */}
             <select
               value={selectedCategory}
               onChange={(e) => setSelectedCategory(e.target.value)}
@@ -85,7 +101,7 @@ export default function Marketplace() {
               ))}
             </select>
 
-            {/* Price Filter */}
+            {/* Price */}
             <select
               value={priceRange}
               onChange={(e) => setPriceRange(e.target.value)}
@@ -98,7 +114,7 @@ export default function Marketplace() {
               ))}
             </select>
 
-            {/* View Mode Toggle */}
+            {/* View Mode */}
             <div className="flex border border-gray-300 rounded-md">
               <button
                 onClick={() => setViewMode('grid')}
@@ -116,19 +132,21 @@ export default function Marketplace() {
           </div>
         </div>
 
-        {/* Results Count */}
+        {/* Count */}
         <div className="flex items-center justify-between mb-6">
           <p className="text-gray-600">
-            Showing {filteredProducts.length} of {mockProducts.length} products
+            Showing {filteredProducts.length} of {products.length} products
           </p>
         </div>
 
-        {/* Products Grid */}
-        <div className={`grid gap-6 ${
-          viewMode === 'grid' 
-            ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4' 
-            : 'grid-cols-1'
-        }`}>
+        {/* Product Display */}
+        <div
+          className={`grid gap-6 ${
+            viewMode === 'grid'
+              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
+              : 'grid-cols-1'
+          }`}
+        >
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
