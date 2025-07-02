@@ -8,10 +8,10 @@ import {
   X, 
   Truck, 
   Milk, 
-  BookOpen,
-  Bell
+  BookOpen 
 } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
+import NotificationBell from './NotificationBell'; 
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,7 +37,7 @@ export default function Header() {
               <Wheat className="h-8 w-8 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">AgriConnect</h1>
+              <h1 className="text-xl font-bold text-gray-900">Agrikart</h1>
               <p className="text-xs text-gray-500">Farmer's Marketplace</p>
             </div>
           </Link>
@@ -65,15 +65,10 @@ export default function Header() {
 
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
-            {/* Notifications */}
-            <button className="relative p-2 text-gray-700 hover:text-green-600 transition-colors">
-              <Bell className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                3
-              </span>
-            </button>
+            {/* ✅ Notifications */}
+            <NotificationBell />
 
-            {/* Cart */}
+            {/* 🛒 Cart */}
             <Link 
               to="/cart" 
               className="relative p-2 text-gray-700 hover:text-green-600 transition-colors"
@@ -86,7 +81,7 @@ export default function Header() {
               )}
             </Link>
 
-            {/* User Profile */}
+            {/* 👤 User/Profile */}
             {state.user ? (
               <Link 
                 to="/profile" 
@@ -111,7 +106,7 @@ export default function Header() {
               </Link>
             )}
 
-            {/* Mobile Menu Button */}
+            {/* 📱 Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 rounded-md text-gray-700 hover:text-green-600 hover:bg-gray-100"
@@ -121,7 +116,7 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* 📱 Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden border-t border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
