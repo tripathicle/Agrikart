@@ -14,7 +14,7 @@ To run this project locally, follow these steps:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/sktripathiinfo/agrikart.git
+git clone https://github.com/tripathicle/agrikart.git
 cd agrikart/project
 
 Install Dependencies
