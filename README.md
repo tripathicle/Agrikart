@@ -1,7 +1,7 @@
 # 🌾 AgriKart
 
 ✅ AgriKart — Microservices-Based Agriculture Platform
-AgriKart is an agriculture-focused e-commerce and service platform built using a modern, scalable technology stack. It connects farmers, traders, and service providers by enabling product trading, weather updates, tractor rentals, and milk delivery requests — all through a unified web platform.
+AgriKart is an agriculture-focused e-commerce and service platform built using a modern, scalable technology stack. It connects farmers, traders, and service providers by enabling product trading, weather updates, tractor rentals, and milk delivery requests — all through a unified web platform..
 
 ### 🛠️ How the Application Was Developed
 #### 🔹 Frontend:
