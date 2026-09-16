@@ -47,7 +47,7 @@ The application currently contains features such as:
 - Registration page
 - MySQL-backed product data
 
-## The application consists of three major layers:
+# The application consists of three major layers:
 
 ```text
                     ┌─────────────────────┐
@@ -74,34 +74,21 @@ The application currently contains features such as:
 #  Technology Stack
 Frontend
 React
-
 TypeScript
-
 Vite
-
 React Router
-
 Tailwind CSS
-
 Backend
 Node.js
-
 Express.js
-
 CORS
-
 dotenv
-
 mysql2
-
 Database
 MySQL
-
 MySQL Workbench
-
 Version Control
 Git
-
 GitHub
 
 ---
@@ -322,9 +309,8 @@ is working correctly.
 ```
 ---
 
-## 7. Frontend Setup
+# 7. Frontend Setup
 Open a second terminal.
-
 Navigate to the frontend:
 
 ```
@@ -334,9 +320,7 @@ npm install
 ```
 ---
 
-## 8. Run the Frontend
-
-
+# 8. Run the Frontend
 Start the Vite development server:
 npm run dev
 Vite normally starts at:
@@ -348,7 +332,7 @@ Always use the URL shown in the terminal.
 9. Application Routes
 The current application includes the following routes.
 
-## Home
+# Home
 http://localhost:5173/
 Marketplace
 http://localhost:5173/marketplace
@@ -375,7 +359,7 @@ The Register route should be:
 The Login route is:
 <Route path="/login" element={<Login />} />
 
-# 📝 Registration
+#  Registration
 The registration page is located at:
 project/src/pages/Register.tsx
 The current registration form contains:
@@ -390,7 +374,7 @@ The current Register page is a frontend form.
 ---
 ## At the current stage, submitting the form does not automatically create a user in MySQL unless the backend registration API has been implemented.
 
-## 🗃️ Users Table
+# Users Table
 For database-backed registration, a users table can be created.
 Run in MySQL Workbench:
 ```
@@ -411,7 +395,7 @@ Passwords should never be stored as plain text in a production application. Pass
 ```
 
 ---
-## 🔐 Login
+# 🔐 Login
 
 The Login page is located at:
 project/src/pages/Login.tsx
@@ -420,7 +404,7 @@ http://localhost:5173/login
 The login page currently exists as part of the frontend routing.
 A complete authentication system should connect the login form to a backend authentication API.
 
-## 🔄 Frontend/Backend Architecture
+# 🔄 Frontend/Backend Architecture
 
 #### The application follows this general flow:
 
@@ -483,11 +467,10 @@ Marketplace
 ---
 
 
-# 🧪 Complete Local Testing
+#  Complete Local Testing
 ## After starting both frontend and backend, verify the following.
+
 ---
-
-
 # Backend
 
 Open:
@@ -501,262 +484,179 @@ Expected:
 
 ---
 
-AgriKart Home Page
+# AgriKart Home Page
 
 Marketplace
 Open:
-
 http://localhost:5173/marketplace
-
 Expected:
-
 Marketplace products
-
 Login
 Open:
-
 http://localhost:5173/login
-
 Expected:
-
 Login page
-
 Register
 Open:
-
 http://localhost:5173/register
-
 Expected:
 
-Registration page
+---
+# Registration page
 
-🐛 Troubleshooting
+## Troubleshooting
+
+```
 1. npm start Shows Missing Script
 If you run:
-
 npm start
-
 and see:
-
 Missing script: "start"
-
 Use:
-
 node index.js
-
 from the backend directory.
-
 2. MySQL Access Denied
 Example:
-
 Access denied for user 'root'@'localhost'
-
 Check your backend .env:
-
 DB_HOST=localhost
 DB_USER=root
 DB_PASS=YOUR_MYSQL_PASSWORD
 DB_NAME=agricart
 
-Make sure the password matches your MySQL account.
+```
+---
 
+## Make sure the password matches your MySQL account.
+
+```
 3. Unknown Database
 Example:
-
 Unknown database 'agricart'
-
 Check databases:
-
 SHOW DATABASES;
-
 Create the database if required:
-
 CREATE DATABASE agricart;
-
 Then verify .env:
-
 DB_NAME=agricart
-
 4. Port 5173 Already in Use
 You may see:
-
 Port 5173 is in use, trying another one...
-
 This is normally not an error.
-
 Vite will automatically select another port:
-
 Local: http://localhost:5174/
-
 Use the URL displayed by Vite.
+```
+---
 
-5. Register Page Is Blank
+# 5. Register Page Is Blank
 Check that:
-
 project/src/pages/Register.tsx
-
 exists.
-
 Check the import in App.tsx:
-
 import Register from './pages/Register';
-
 Check the route:
-
 <Route path="/register" element={<Register />} />
 
-6. Products Are Not Loading
+# 6. Products Are Not Loading
 First test the API directly:
-
 http://localhost:5000/api/products
-
 If JSON data is returned, the backend and database are working.
-
 Then check the browser developer console:
-
 F12 → Console
-
 Also check:
-
 F12 → Network
 
-Look for:
 
+# Look for:
 /api/products
 
-7. Images Are Not Loading
+# 7. Images Are Not Loading
 Some database records may contain webpage URLs instead of direct image URLs.
-
 For example, this type of URL:
-
 https://unsplash.com/photos/...
-
 is a webpage URL, not necessarily a direct image file.
-
 A direct image URL usually points to an actual image resource such as:
-
 .jpg
 .png
 .webp
 
-Check the database:
+# Check the database:
 
 SELECT id, name, image_url
 FROM products;
-
 Replace invalid image URLs with valid direct image URLs when necessary.
-
 🔒 Security Notes
 Never commit credentials to GitHub.
 
 Do not commit:
-
 .env
-
 Do not put:
-
 MySQL passwords
-
 API keys
-
 JWT secrets
-
 Private credentials
-
 directly into source code.
 
-Use environment variables instead.
+#  Use environment variables instead.
 
 📤 Git and GitHub
 Before pushing changes, navigate to the repository root:
-
 cd ~/Desktop/Devops/Agrikart
-
 Check the current Git status:
-
 git status
-
 Make sure .env is not listed as a file to commit.
-
 Stage changes:
-
 git add .
-
 Check again:
-
 git status
-
 Create a commit:
-
 git commit -m "Update AgriKart application"
-
 Push to GitHub:
-
 git push origin main
-
 ⚠️ Before Every Git Push
 Always check:
-
 git status
-
 Make sure this is NOT being committed:
-
 backend/.env
-
 Your .gitignore should include:
-
 .env
 node_modules
 dist
 
-📅 Daily Startup
+# 📅 Daily Startup
 Once the project has been configured, you normally need two terminals.
-
 Terminal 1 — Backend
 cd ~/Desktop/Devops/Agrikart/backend
 node index.js
-
 Expected:
 
 Backend running at http://localhost:5000
 ✅ MySQL Connected
-
 Keep this terminal running.
-
 Terminal 2 — Frontend
 cd ~/Desktop/Devops/Agrikart/project
 npm run dev
-
 Vite will display the frontend URL.
-
 Example:
-
 Local: http://localhost:5173/
-
 or:
-
 Local: http://localhost:5174/
-
 Open that URL in your browser.
 
-🛑 Stopping the Application
+---
+## 🛑 Stopping the Application
 To stop the backend:
-
+```
 Ctrl + C
-
 To stop the frontend:
-
 Ctrl + C
-
 Stop each process in its respective terminal.
-
 ⚡ Quick Start
 If everything is already installed and configured:
-
 Terminal 1
 cd ~/Desktop/Devops/Agrikart/backend
 node index.js
-
 Terminal 2
 cd ~/Desktop/Devops/Agrikart/project
 npm run dev
@@ -770,91 +670,57 @@ Alternative Vite Port	5174
 Backend / Express	5000
 MySQL	3306
 
-🧱 Recommended Future Improvements
-The following improvements can be implemented as the project evolves.
+```
+---
 
+# Recommended Future Improvements
+The following improvements can be implemented as the project evolves.
 Authentication
 Connect Register form to backend
-
 Add registration API
-
 Hash passwords using bcrypt
-
 Add login API
-
 Add JWT/session authentication
-
 Add logout functionality
-
 Protect authenticated routes
-
 Database
 Users table
-
 Orders table
-
 Cart table
-
 Farmer profiles
-
 Product management
-
 Order history
-
 Transaction records
 
-Backend
+# Backend
 Input validation
-
 Better error handling
-
 Authentication middleware
-
 Database connection pooling
-
 REST API structure
-
 Environment-based configuration
-
 Request logging
-
 Frontend
 Form validation
-
 Authentication state
-
 Protected routes
-
 User dashboard
-
 Shopping cart
-
 Order management
-
 Loading states
-
 Error states
-
 Better image handling
-
 DevOps
 Docker
-
 Docker Compose
-
 CI/CD pipeline
-
 Automated testing
-
 Production environment configuration
-
 Cloud deployment
-
 Health-check endpoints
-
 Monitoring and logging
 
-🩺 Health Check
+# 🩺 Health Check
 Before considering the local setup successful, verify:
 
 Component	Test	Expected Result
@@ -871,29 +737,18 @@ Login	/login	Login page
 Register	/register	Register page
 Marketplace	/marketplace	Products displayed
 
-🎯 Complete Startup Checklist
+#  Complete Startup Checklist
 Before starting AgriKart:
-
  Node.js installed
-
  npm installed
-
  Git installed
-
  MySQL Server running
-
  MySQL Workbench connected
-
  agricart database exists
-
  products table exists
-
  backend/.env exists
-
  MySQL credentials are correct
-
  Backend dependencies installed
-
  Frontend dependencies installed
 
 Start the backend:
@@ -902,36 +757,26 @@ cd backend
 node index.js
 
 Start the frontend in another terminal:
-
 cd project
 npm run dev
 
 Open the frontend URL shown by Vite.
 
-✅ Current Working Setup
+# Current Working Setup
 At the current development stage, the following components are configured:
-
 React/Vite frontend
-
 Express backend
-
 MySQL database
-
 Product API
-
 Marketplace
-
 Login page
-
 Register page
-
 React Router
-
 Environment-based MySQL configuration
-
 Git/GitHub workflow
 
-🌱 AgriKart Development Flow
+##  AgriKart Development Flow
+```
                     AgriKart
                        │
                        ▼
@@ -953,19 +798,17 @@ Git/GitHub workflow
               │      MySQL      │
               │    agricart     │
               └─────────────────┘
+```
 
-🎉 AgriKart is Ready for Local Development
+
+# AgriKart is Ready for Local Development
 Once the backend displays:
-
-✅ MySQL Connected
-
+MySQL Connected
 and Vite displays:
-
 Local: http://localhost:5173/
-
 or another available local port, the AgriKart development environment is ready.
 
-Happy coding! 🌱🚀
+Happy coding! 🌱
 
 
 
