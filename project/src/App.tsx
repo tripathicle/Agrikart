@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
 import Header from './components/Header';
@@ -8,6 +8,10 @@ import TractorServices from './pages/TractorServices';
 import MilkTrading from './pages/MilkTrading';
 import Community from './pages/Community';
 import Login from './pages/Login'; // ✅ Import Login Page
+import Register from './pages/Register';
+
+
+
 
 
 function App() {
@@ -23,6 +27,8 @@ function App() {
             <Route path="/milk" element={<MilkTrading />} />
             <Route path="/community" element={<Community />} />
              <Route path="/login" element={<Login />} /> {/* ✅ Added Login Route */}
+             <Route path="/register" element={<Register />} />
+
           </Routes>
         </div>
       </Router>
